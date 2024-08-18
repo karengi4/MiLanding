@@ -1,0 +1,18 @@
+h1 {
+    color:rgb(7, 53, 140);
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-variant: small-caps;
+}
+
+div img {
+    max-width: 130px;
+}
+
+button:hover{
+        color:white;
+        background-color:rgb(7, 53, 140); ;
+    }
+
+button{
+    margin: 10px;
+}    
