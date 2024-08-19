@@ -1,9 +1,10 @@
 import CartWidget from "../CartWidget/CartWidget";
+import logo from "../../assets/logo.png"; 
 
 const NavBar = () => {
     return (
         <nav>
-            <div><img src="./src/assets/logo.png" alt="Logo" /></div>
+            <div><img src={logo} alt="Logo" /></div>
             <div>
                 <button>Servicios para empresas</button>
                 <button>Servicios para particulares</button>
