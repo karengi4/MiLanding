@@ -4,33 +4,33 @@ export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
+  const [message, setMessage] = useState('');
 
-  const addToCart = (product, quantity) => { 
-    const existingProduct = cart.find(p => p.id === product.id);
+  const addToCart = (item, quantity) => {
+    setMessage(`Añadido al carrito: ${item.titulo}`);
 
-    if (existingProduct) {
-      setCart(cart.map(p => 
-        p.id === product.id ? { ...p, quantity: (p.quantity || 0) + quantity } : p
-      ));
+    const existingItemIndex = cart.findIndex((cartItem) => cartItem.id === item.id);
+
+    if (existingItemIndex > -1) {
+      const updatedCart = [...cart];
+      updatedCart[existingItemIndex].quantity += quantity;
+      setCart(updatedCart);
     } else {
-      setCart([...cart, { ...product, quantity }]);
+      setCart([...cart, { ...item, quantity }]);
     }
   };
 
-  const removeFromCart = (productId) => {
-    setCart(cart.filter((product) => product.id !== productId));
+  const sumatoriaCarrito = () => {
+    return cart.reduce((total, item) => total + item.precio * item.quantity, 0);
   };
 
-  const sumatoriaCarrito = () => {
-    return cart.reduce((acc, product) => {
-      const price = Number(product.precio) || 0;
-      const quantity = Number(product.quantity) || 1;
-      return acc + (price * quantity);
-    }, 0);
+  const clearCart = () => {
+    setCart([]);
+    setMessage('');
   };
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart, sumatoriaCarrito }}>
+    <CartContext.Provider value={{ cart, addToCart, sumatoriaCarrito, message, setMessage, clearCart }}>
       {children}
     </CartContext.Provider>
   );

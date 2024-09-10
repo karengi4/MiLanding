@@ -1,23 +1,37 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { CartContext } from '../../context/CartContext';
 
 function Carrito() {
-  const { cart } = useContext(CartContext);
+  const { cart, sumatoriaCarrito, message, setMessage, clearCart } = useContext(CartContext);
 
-  if (!cart) {
-    return <p>Loading...</p>; 
-  }
+  const handleFinalizePurchase = () => {
+    if (cart.length === 0) {
+      setMessage('No hay items en el carrito.');
+    } else {
+      setMessage('¡Gracias por tu compra!');
+      clearCart();
+    }
+  };
 
   return (
     <div>
+      {message && <p>{message}</p>}
       {cart.length > 0 ? (
-        <ul>
-          {cart.map((item) => (
-            <li key={item.id}>{item.titulo} - ${item.precio} x {item.quantity}</li>
-          ))}
-        </ul>
+        <>
+          <ul className="list-unstyled">
+            {cart.map((item) => (
+              <li key={item.id}>
+                {item.titulo} - ${item.precio} x {item.quantity}
+              </li>
+            ))}
+          </ul>
+          <h3>Total: ${sumatoriaCarrito()}</h3>
+          <button onClick={handleFinalizePurchase} className="btn btn-success">
+            Finalizar Compra
+          </button>
+        </>
       ) : (
-        <p>No hay items en el carrito.</p>
+        !message && <p>No hay items en el carrito.</p>
       )}
     </div>
   );

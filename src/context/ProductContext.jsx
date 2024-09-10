@@ -4,12 +4,12 @@ import productsData from '../data/products.json';
 export const ProductContext = createContext();
 
 export const ProductProvider = ({ children }) => {
-  const [products, setProducts] = useState(productsData || []); 
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
     const fetchProducts = () => {
       try {
-        setProducts(productsData);
+        setProducts(productsData); 
       } catch (error) {
         console.error("Error al cargar los productos: ", error);
       }

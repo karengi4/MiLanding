@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import ItemCount from '../ItemCount/ItemCount';
 import { Link } from 'react-router-dom';
 import { CartContext } from '../../context/CartContext';
@@ -9,8 +9,12 @@ const toCapital = (str) => {
 };
 
 const ItemDetail = ({ item }) => {
-    const { addToCart } = useContext(CartContext);
+    const { addToCart, message, setMessage } = useContext(CartContext);
     const [cantidad, setCantidad] = useState(1);
+
+    useEffect(() => {
+        setMessage(''); 
+    }, [item, setMessage]);
 
     const handleRestar = () => {
         if (cantidad > 1) {
@@ -29,7 +33,7 @@ const ItemDetail = ({ item }) => {
             <div className="row">
                 <div className="col-md-6">
                     <img 
-                        src={item.imagen || 'https://via.placeholder.com/300'} 
+                        src={item.imagen || 'https://picsum.photos/200'} 
                         alt={item.titulo} 
                         className="img-fluid" 
                     />
@@ -42,8 +46,12 @@ const ItemDetail = ({ item }) => {
                     <ItemCount
                         initial={1}
                         stock={item.stock}
-                        onAdd={(cantidad) => addToCart(item, cantidad)} 
+                        onAdd={(cantidad) => {
+                            addToCart(item, cantidad);
+                            setMessage(`Añadido al carrito: ${item.titulo}`);
+                        }} 
                     />
+                    {message && <p>{message}</p>}
                     <Link to="/" className="btn btn-secondary mt-3">Volver al inicio</Link>
                 </div>
             </div>

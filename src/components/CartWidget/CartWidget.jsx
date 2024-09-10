@@ -1,17 +1,19 @@
+import { useContext } from 'react';
+import { CartContext } from '../../context/CartContext';
 import { Link } from 'react-router-dom';
-import { useCart } from '../../context/CartContext';
 
-const CartWidget = () => {
-    const { sumatoriaCarrito } = useCart();
+function CartWidget() {
+  const { cart } = useContext(CartContext);
+  const itemCount = cart.reduce((acc, item) => acc + item.quantity, 0);
 
-    return (
-        <div>
-            <Link className="menu-link" to="/carrito">
-                Carrito de compras
-                <span className="numero">${sumatoriaCarrito()}</span>
-            </Link>
-        </div>
-    );
-};
+  return (
+    <div>
+      <Link to="/carrito">
+        <span>🛒</span>
+        {itemCount > 0 && <span>({itemCount})</span>}
+      </Link>
+    </div>
+  );
+}
 
 export default CartWidget;

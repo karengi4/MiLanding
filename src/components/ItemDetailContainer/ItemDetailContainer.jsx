@@ -22,15 +22,15 @@ const ItemDetailContainer = () => {
         <div className="row">
           <div className="col-md-6">
             <img
-              src={item.img}
-              alt={item.name}
+              src={item.imagen}
+              alt={item.titulo}
               className="img-fluid rounded mb-4"
             />
           </div>
           <div className="col-md-6">
-            <h2 className="mb-3">{item.name}</h2>
+            <h2 className="mb-3">{item.titulo}</h2>
             <p className="text-muted mb-4">{item.description}</p>
-            <p className="h4 mb-4">${item.price}</p>
+            <p className="h4 mb-4">${item.precio}</p>
             <p className="text-muted mb-4">Stock: {item.stock}</p>
             <ItemDetail item={item} />
           </div>
