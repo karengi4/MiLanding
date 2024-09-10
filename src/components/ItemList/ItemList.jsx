@@ -5,14 +5,16 @@ const ItemList = ({ productos, titulo }) => {
     <div className="container">
       <h2 className="my-4">{titulo}</h2>
       <div className="row">
-        {productos.map((prod) => (
-          <div className="col-md-4 mb-4" key={prod.id}>
-            <Item producto={prod} />
-          </div>
-        ))}
+        {productos.length > 0 ? (
+          productos.map((prod) => (
+            <Item producto={prod} key={prod.id} />
+          ))
+        ) : (
+          <p>No hay productos disponibles.</p>
+        )}
       </div>
     </div>
   );
 };
 
-export default ItemList
+export default ItemList;

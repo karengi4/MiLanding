@@ -1,4 +1,3 @@
-import './ItemListContainer.css'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import ItemList from '../ItemList/ItemList'
@@ -7,33 +6,36 @@ import Row from 'react-bootstrap/Row'
 import { useProducts } from '../../context/ProductContext'
 
 const ItemListContainer = ({ titulo }) => {
-  const [productos, setProductos] = useState([])
-  const { id: categoria } = useParams()
-  const { products } = useProducts()
+  const [productos, setProductos] = useState([]);
+  const { id: categoria } = useParams();
+  const { products } = useProducts();
 
   useEffect(() => {
-    const fetchProducts = new Promise((resolve) => {
+    const fetchProducts = () => {
       if (categoria) {
-        const filteredProducts = products.filter(prod => prod.category === categoria)
-        resolve(filteredProducts)
-      } else {
-        resolve(products)
+        return products.filter(prod => prod.category.toLowerCase() === categoria.toLowerCase());
       }
-    })
+      return products;
+    };
 
-    fetchProducts
-      .then(filteredProducts => setProductos(filteredProducts))
-      .catch(error => console.error('Error al obtener los productos:', error))
-  }, [categoria, products])
+    const filteredProducts = fetchProducts();
+    setProductos(filteredProducts);
+  }, [categoria, products]);
 
-  return (
-    <Container className="p-3">
-      <Row>
-        <h1 className="my-4">{titulo}</h1>
-        <ItemList productos={productos} />
-      </Row>
-    </Container>
-  )
-}
+  const categoryTitle = categoria ? categoria : titulo;
+    return (
+      <Container className="p-3">
+        <Row>
+          <h1 className="my-4">{categoryTitle}</h1>
+          {/* Mostrar los productos filtrados */}
+          {productos.length > 0 ? (
+            <ItemList productos={productos} />
+          ) : (
+            <p>No hay productos disponibles en esta categoría.</p>
+          )}
+        </Row>
+      </Container>
+    );
+  };
 
 export default ItemListContainer

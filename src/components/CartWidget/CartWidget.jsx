@@ -1,18 +1,17 @@
-import {Link} from 'react-router-dom'
-import { useCart } from '../../context/CartContext'
+import { Link } from 'react-router-dom';
+import { useCart } from '../../context/CartContext';
 
 const CartWidget = () => {
+    const { sumatoriaCarrito } = useCart();
 
-    const {sumatoriaCarrito} = useCart();
-
-    return(
+    return (
         <div>
             <Link className="menu-link" to="/carrito">
-            Carrito de compras
+                Carrito de compras
                 <span className="numero">${sumatoriaCarrito()}</span>
             </Link>
         </div>
-    )
-}
+    );
+};
 
-export default CartWidget
+export default CartWidget;

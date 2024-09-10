@@ -1,40 +1,39 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState } from 'react';
 
-export const CartContext = createContext ()
+export const CartContext = createContext();
 
-export const CartProvider = ({children}) => {
-    const [cart, setCart] = useState([])
+export const CartProvider = ({ children }) => {
+  const [cart, setCart] = useState([]);
 
-    const addItem = (item, cantidad) => {
-        if (!isInCart(idem.id)) {
-            setCart(prev => [...prev, {...item, cantidad}])
-        } else {
-            console.error('El producto ya está en el carrito')
-        }
+  const addToCart = (product, quantity) => { 
+    const existingProduct = cart.find(p => p.id === product.id);
+
+    if (existingProduct) {
+      setCart(cart.map(p => 
+        p.id === product.id ? { ...p, quantity: (p.quantity || 0) + quantity } : p
+      ));
+    } else {
+      setCart([...cart, { ...product, quantity }]);
     }
+  };
 
-    const removeItem = (itemId) => {
-        const cartUpdated = cart.filter(prod => prod.id !== itemId)
-        setCart (cartUpdated)
-    }
+  const removeFromCart = (productId) => {
+    setCart(cart.filter((product) => product.id !== productId));
+  };
 
-    const clearCard = () => {
-        setCart([])
-    }
+  const sumatoriaCarrito = () => {
+    return cart.reduce((acc, product) => {
+      const price = Number(product.precio) || 0;
+      const quantity = Number(product.quantity) || 1;
+      return acc + (price * quantity);
+    }, 0);
+  };
 
-    const isInCart =(itemId) => {
-        return cart.some(prod => prod.id ===itemId)
-    }
+  return (
+    <CartContext.Provider value={{ cart, addToCart, removeFromCart, sumatoriaCarrito }}>
+      {children}
+    </CartContext.Provider>
+  );
+};
 
-    const sumatoriaCarrito = () => {
-        return cart.reduce((total, item) => total + item.price * item.quantity, 0)
-    }
-
-    return (
-        <CartContext.Provider value={{cart, addItem, removeItem, clearCard, sumatoriaCarrito}}>
-            {children}
-        </CartContext.Provider>
-    )
-}
-
-export const useCart = () => useContext(CartContext)
+export const useCart = () => useContext(CartContext);
