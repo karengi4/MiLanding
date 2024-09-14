@@ -33,7 +33,7 @@ const ItemDetail = ({ item }) => {
             <div className="row">
                 <div className="col-md-6">
                     <img 
-                        src={item.imagen || 'https://picsum.photos/200'} 
+                        src={item.imagen || 'https://source.unsplash.com/random/300x200?business,office,team&'} 
                         alt={item.titulo} 
                         className="img-fluid" 
                     />
