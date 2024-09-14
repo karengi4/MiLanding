@@ -16,7 +16,7 @@ function Item({ producto }) {
             <Card>
                 <Card.Img 
                     variant='top' 
-                    src={imagen || 'https://picsum.photos/300/200'} 
+                    src={imagen || 'https://source.unsplash.com/random/300x200?business,office,team&'} 
                     alt={titulo || 'Imagen no disponible'} 
                 />
                 <Card.Body>
