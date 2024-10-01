@@ -22,6 +22,7 @@ const Testimonios = () => {
                 </div>
               </div>
             </div>
+
             <div className="carousel-item">
               <div className="d-flex flex-column justify-content-center align-items-center">
                 <img className="rounded-circle mb-3" src={demian} alt="Demian" width="150" height="150" />
@@ -32,6 +33,7 @@ const Testimonios = () => {
                 </div>
               </div>
             </div>
+
             <div className="carousel-item">
               <div className="d-flex flex-column justify-content-center align-items-center">
                 <img className="rounded-circle mb-3" src={laura} alt="Laura" width="150" height="150" />

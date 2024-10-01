@@ -18,9 +18,11 @@ const Carrito = () => {
   };
 
   const handleCheckout = () => {
-    if (customerData.nombre && customerData.email) {
-      clearCart();
-      setIsCheckout(true);
+    if (cart.length > 0 && customerData.nombre && customerData.email) {
+      setIsCheckout(true);  
+      clearCart(); 
+    } else {
+      alert('Por favor, completa los datos personales y agrega productos al carrito.');
     }
   };
 
@@ -30,12 +32,14 @@ const Carrito = () => {
         <div className="col-md-8 mb-3">
           <h1>Tu Carrito</h1>
           {cart.length === 0 ? (
-            <p>No hay productos en el carrito.</p>
-          ) : isCheckout ? (
-            <div>
-              <h3 className="text-success">Gracias por tu compra, {customerData.nombre}!</h3>
-              <p>Te contactaremos pronto para confirmar tus datos.</p>
-            </div>
+            isCheckout ? (  
+              <div>
+                <h3 className="text-success">Gracias por tu compra</h3>
+                <p>Te contactaremos pronto para confirmar tus datos.</p>
+              </div>
+            ) : (
+              <p>No hay productos en el carrito.</p>
+            )
           ) : (
             <div>
               {cart.map((item) => (
@@ -46,7 +50,7 @@ const Carrito = () => {
                 </div>
               ))}
               <h3>Total: ${totalPrice()}</h3>
-              <button className="btn btn-primary me-2" onClick={() => setIsCheckout(false)}>Finalizar Compra</button>
+              <button className="btn btn-primary me-2" onClick={handleCheckout}>Finalizar Compra</button>
               <button className="btn btn-secondary" onClick={clearCart}>Vaciar Carrito</button>
             </div>
           )}
