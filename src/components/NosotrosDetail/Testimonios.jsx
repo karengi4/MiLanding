@@ -16,7 +16,7 @@ const Testimonios = () => {
               <img className="rounded-circle mb-3" src={ricardo} alt="Foto de Ricardo" width="150" height="150" />
               <p className="lead">“Hemos quedado sumamente conformes con el asesoramiento recibido porque nos permitió avanzar rápidamente con nuestros requerimientos siendo dinámico y ágil. Esperamos seguir contando con ustedes en nuevos proyectos".</p>
               <div className="mt-3">
-                <p className="font-weight-bold">Ricardo</p>
+                <p className="fw-bold">Ricardo</p>
                 <p className="text-muted">Director General de Altos del Mar</p>
               </div>
             </div>
@@ -26,7 +26,7 @@ const Testimonios = () => {
               <img className="rounded-circle mb-3" src={demian} alt="Foto de Demian" width="150" height="150" />
               <p className="lead">"Realizamos un taller con nuestros equipos donde los comentarios recibidos fueron muy positivos, y sin dudas ha sido, hasta el momento, el taller que mejor nos transmitió herramientas prácticas para incorporar durante la jornada".</p>
               <div className="mt-3">
-                <p className="font-weight-bold">Demian</p>
+                <p className="fw-bold">Demian</p>
                 <p className="text-muted">Gerente de FrioSur</p>
               </div>
             </div>
@@ -36,7 +36,7 @@ const Testimonios = () => {
               <img className="rounded-circle mb-3" src={laura} alt="Foto de Laura" width="150" height="150" />
               <p className="lead">"Hemos obtenido un proceso de selección serio y profesional con un gran resultado en la conformación de equipos en nuestros emprendimientos. Queremos seguir trabajando juntos ya que los resultados quedan demostrados rápidamente.”</p>
               <div className="mt-3">
-                <p className="font-weight-bold">Laura</p>
+                <p className="fw-bold">Laura</p>
                 <p className="text-muted">Directora de Innovarg</p>
               </div>
             </div>
