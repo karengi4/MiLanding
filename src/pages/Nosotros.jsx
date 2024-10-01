@@ -54,7 +54,7 @@ const Nosotros = () => {
 
       <h2 className="mt-5">Contáctanos</h2>
       <p>
-        Para más información sobre nuestros servicios, no dudes en <a href="/contacto">contactarnos</a>.
+        Para más información sobre nuestros servicios, no dudes en <a href="/Contacto">contactarnos</a>.
       </p>
     </div>
   );

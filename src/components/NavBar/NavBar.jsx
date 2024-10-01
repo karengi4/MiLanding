@@ -25,6 +25,9 @@ const NavBar = () => {
               <Link className="nav-link btn btn-outline-primary mx-2" to="/servicios">Servicios</Link>
             </li>
             <li className="nav-item">
+              <Link className="nav-link btn btn-outline-primary mx-2" to="/busquedas">Búquedas</Link>
+            </li>
+            <li className="nav-item">
               <Link className="nav-link btn btn-outline-primary mx-2" to="/contacto">Contacto</Link>
             </li>
           </ul>

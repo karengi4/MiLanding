@@ -3,8 +3,8 @@ import Home from '../pages/Home';
 import Nosotros from '../pages/Nosotros';
 import Contacto from '../pages/Contacto';
 import Servicios from '../pages/Servicios';
-import Busquedas from '../pages/Busquedas';
 import ItemDetailContainer from '../components/ItemDetailContainer/ItemDetailContainer';
+import Busquedas from '../pages/Busquedas';
 import Carrito from '../components/Carrito/Carrito';
 
 const AppRoutes = () => {
