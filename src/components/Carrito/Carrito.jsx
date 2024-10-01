@@ -1,40 +1,29 @@
 import { useContext } from 'react';
 import { CartContext } from '../../context/CartContext';
 
-function Carrito() {
-  const { cart, sumatoriaCarrito, message, setMessage, clearCart } = useContext(CartContext);
-
-  const handleFinalizePurchase = () => {
-    if (cart.length === 0) {
-      setMessage('No hay items en el carrito.');
-    } else {
-      setMessage('¡Gracias por tu compra!');
-      clearCart();
-    }
-  };
+const Carrito = () => {
+  const { cart, removeFromCart, clearCart, totalPrice } = useContext(CartContext);
 
   return (
     <div>
-      {message && <p>{message}</p>}
-      {cart.length > 0 ? (
-        <>
-          <ul className="list-unstyled">
-            {cart.map((item) => (
-              <li key={item.id}>
-                {item.titulo} - ${item.precio} x {item.quantity}
-              </li>
-            ))}
-          </ul>
-          <h3>Total: ${sumatoriaCarrito()}</h3>
-          <button onClick={handleFinalizePurchase} className="btn btn-success">
-            Finalizar Compra
-          </button>
-        </>
+      <h1>Tu Carrito</h1>
+      {cart.length === 0 ? (
+        <p>No hay productos en el carrito.</p>
       ) : (
-        !message && <p>No hay items en el carrito.</p>
+        <div>
+          {cart.map((item) => (
+            <div key={item.id}>
+              <p>{item.title}</p>
+              <p>Precio: ${item.price}</p>
+              <button onClick={() => removeFromCart(item.id)}>Eliminar</button>
+            </div>
+          ))}
+          <h3>Total: ${totalPrice()}</h3>
+          <button onClick={clearCart}>Vaciar Carrito</button>
+        </div>
       )}
     </div>
   );
-}
+};
 
 export default Carrito;

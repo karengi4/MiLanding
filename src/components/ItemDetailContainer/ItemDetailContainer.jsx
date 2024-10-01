@@ -1,47 +1,41 @@
-import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '../../services/firebase/firebaseConfig';
 import ItemDetail from '../ItemDetail/ItemDetail';
-import { useProducts } from '../../context/ProductContext'
-import { Container, Spinner } from 'react-bootstrap'
 
 const ItemDetailContainer = () => {
-  const [item, setItem] = useState(null)
-  const { id } = useParams()
-  const { products } = useProducts()
+  const [item, setItem] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null); 
+  const { id } = useParams();
 
   useEffect(() => {
-    const product = products.find((p) => p.id === id)
-    if (product) {
-      setItem(product)
-    }
-  }, [id, products]);
+    const getItem = async () => {
+      try {
+        const itemRef = doc(db, 'items', id);
+        const docSnap = await getDoc(itemRef);
+
+        if (docSnap.exists()) {
+          setItem({ id: docSnap.id, ...docSnap.data() });
+        } else {
+          setError('No se encontró el documento'); 
+        }
+      } catch (err) {
+        setError('Error al obtener el documento: ' + err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    getItem();
+  }, [id]);
 
   return (
-    <Container className="my-5">
-      {item ? (
-        <div className="row">
-          <div className="col-md-6">
-            <img
-              src={item.imagen}
-              alt={item.titulo}
-              className="img-fluid rounded mb-4"
-            />
-          </div>
-          <div className="col-md-6">
-            <h2 className="mb-3">{item.titulo}</h2>
-            <p className="text-muted mb-4">{item.description}</p>
-            <p className="h4 mb-4">${item.precio}</p>
-            <p className="text-muted mb-4">Stock: {item.stock}</p>
-            <ItemDetail item={item} />
-          </div>
-        </div>
-      ) : (
-        <div className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
-          <Spinner animation="border" variant="primary" />
-        </div>
-      )}
-    </Container>
+    <div>
+      {loading ? <p>Cargando...</p> : error ? <p>{error}</p> : <ItemDetail {...item} />}
+    </div>
   );
 };
 
-export default ItemDetailContainer
+export default ItemDetailContainer;

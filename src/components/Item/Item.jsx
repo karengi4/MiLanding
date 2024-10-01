@@ -1,43 +1,18 @@
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
-import Col from 'react-bootstrap/Col';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 
-function Item({ producto }) {
-    if (!producto) {
-        return <div>Item no disponible</div>;
-    }
-
-    const { imagen, titulo, descripcion, id } = producto;
-
-    return (
-        <Col lg={3} className='p-3'>
-            <Card>
-                <Card.Img 
-                    variant='top' 
-                    src={imagen || 'https://source.unsplash.com/random/300x200?business,office,team&'} 
-                    alt={titulo || 'Imagen no disponible'} 
-                />
-                <Card.Body>
-                    <Card.Title>{titulo}</Card.Title>
-                    <Card.Text>{descripcion}</Card.Text>
-                    <Button variant="primary" as={Link} to={`/products/${id}`}>
-                        Más información
-                    </Button>
-                </Card.Body>
-            </Card>
-        </Col>
-    );
-}
-
-Item.propTypes = {
-    producto: PropTypes.shape({
-        imagen: PropTypes.string,
-        titulo: PropTypes.string.isRequired,
-        descripcion: PropTypes.string,
-        id: PropTypes.string.isRequired,
-    }),
+const Item = ({ id, title, price, image }) => {
+  return (
+    <div className="card">
+      <img src={image} alt={title} />
+      <div className="card-body">
+        <h5 className="card-title">{title}</h5>
+        <p className="card-text">Precio: ${price}</p>
+        <Link to={`/servicios/${id}`} className="btn btn-primary">
+          Ver detalles
+        </Link>
+      </div>
+    </div>
+  );
 };
 
 export default Item;
