@@ -6,26 +6,28 @@ const NavBar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <Link className="navbar-brand" to="/">
-        <img src={logo} alt="Logo" style={{ width: '40px', height: '40px', marginRight: '8px' }} />
+        <img src={logo} alt="Logo" style={{ width: '60px', height: '60px', marginRight: '8px' }} /> 
         Mi E-commerce
       </Link>
       <div className="collapse navbar-collapse">
         <ul className="navbar-nav mr-auto">
           <li className="nav-item">
-            <Link className="nav-link" to="/">Inicio</Link>
+            <Link className="nav-link btn btn-outline-primary mx-2" to="/">Inicio</Link> 
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="/nosotros">Nosotros</Link>
+            <Link className="nav-link btn btn-outline-primary mx-2" to="/nosotros">Nosotros</Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="/servicios">Servicios</Link>
+            <Link className="nav-link btn btn-outline-primary mx-2" to="/servicios">Servicios</Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="/contacto">Contacto</Link>
+            <Link className="nav-link btn btn-outline-primary mx-2" to="/contacto">Contacto</Link>
           </li>
         </ul>
       </div>
-      <CartWidget />
+      <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+        <CartWidget style={{ width: '50px', height: '50px' }} /> 
+      </div>
     </nav>
   );
 };
