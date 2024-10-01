@@ -9,7 +9,7 @@ const Testimonios = () => {
       <h2 className="display-4 mb-4">Testimonios</h2>
       <h3 className="lead mb-5">Estos son algunos de los testimonios de nuestros clientes</h3>
 
-      <div id="testimonios-carrusel" className="carousel carousel-dark" data-bs-ride="carousel">
+      <div id="testimonios-carrusel" className="carousel carousel-dark slide" data-bs-ride="carousel">
         <div className="carousel-inner">
           <div className="carousel-item active">
             <div className="container d-flex flex-column justify-content-center align-items-center">

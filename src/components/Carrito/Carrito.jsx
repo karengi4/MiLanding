@@ -18,24 +18,27 @@ const Carrito = () => {
   };
 
   const handleCheckout = () => {
-    setIsCheckout(true); 
-    clearCart();
+    if (cart.length > 0) {
+      setIsCheckout(true);
+      clearCart();
+    }
   };
 
   return (
-    <div className="container mt-4 d-flex">
-      <div className="col-8">
+    <div className="container mt-4 d-flex flex-column flex-md-row">
+      <div className="col-md-8 mb-3">
         <h1>Tu Carrito</h1>
         {cart.length === 0 ? (
           <p>No hay productos en el carrito.</p>
         ) : isCheckout ? ( 
           <div>
-            <h3>Gracias por tu compra</h3>
+            <h3 className="text-success">Gracias por tu compra</h3>
+            <p>Te contactaremos pronto para confirmar tus datos.</p>
           </div>
         ) : (
           <div>
             {cart.map((item) => (
-              <div key={item.id} className="d-flex justify-content-between align-items-center mb-2">
+              <div key={item.id} className="d-flex justify-content-between align-items-center mb-2 border p-2 rounded">
                 <p>{item.titulo}</p>
                 <p className="text-end">Precio: ${item.precio}</p>
                 <button className="btn btn-danger" onClick={() => removeFromCart(item.id)}>Eliminar</button>
@@ -48,7 +51,7 @@ const Carrito = () => {
         )}
       </div>
 
-      <div className="col-4">
+      <div className="col-md-4">
         <h2>Completa tus datos personales</h2>
         <form onSubmit={(e) => e.preventDefault()}>
           <div className="mb-3">
