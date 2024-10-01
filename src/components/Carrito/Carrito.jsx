@@ -24,12 +24,12 @@ const Carrito = () => {
           {cart.map((item) => (
             <div key={item.id} className="d-flex justify-content-between align-items-center mb-2">
               <p>{item.titulo}</p>
-              <p>Precio: ${item.precio}</p>
+              <p className="text-end">Precio: ${item.precio}</p>
               <button className="btn btn-danger" onClick={() => removeFromCart(item.id)}>Eliminar</button>
             </div>
           ))}
           <h3>Total: ${totalPrice()}</h3>
-          <button className="btn btn-primary" onClick={handleCheckout}>Finalizar Compra</button>
+          <button className="btn btn-primary me-2" onClick={handleCheckout}>Finalizar Compra</button>
           <button className="btn btn-secondary" onClick={clearCart}>Vaciar Carrito</button>
         </div>
       )}
