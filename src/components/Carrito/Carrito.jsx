@@ -18,9 +18,9 @@ const Carrito = () => {
   };
 
   const handleCheckout = () => {
-    if (cart.length > 0 && customerData.nombre && customerData.email) {
-      setIsCheckout(true);
+    if (customerData.nombre && customerData.email) {
       clearCart();
+      setIsCheckout(true);
     }
   };
 
@@ -33,7 +33,7 @@ const Carrito = () => {
             <p>No hay productos en el carrito.</p>
           ) : isCheckout ? (
             <div>
-              <h3 className="text-success">Gracias por tu compra</h3>
+              <h3 className="text-success">Gracias por tu compra, {customerData.nombre}!</h3>
               <p>Te contactaremos pronto para confirmar tus datos.</p>
             </div>
           ) : (
@@ -46,7 +46,7 @@ const Carrito = () => {
                 </div>
               ))}
               <h3>Total: ${totalPrice()}</h3>
-              <button className="btn btn-primary me-2" onClick={handleCheckout}>Finalizar Compra</button>
+              <button className="btn btn-primary me-2" onClick={() => setIsCheckout(false)}>Finalizar Compra</button>
               <button className="btn btn-secondary" onClick={clearCart}>Vaciar Carrito</button>
             </div>
           )}
