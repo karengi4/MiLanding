@@ -68,7 +68,7 @@ const ProductList = () => {
         {filteredProducts.map(product => (
           <div className="col-md-4 mb-4" key={product.id}>
             <div className="card">
-              <img src={product.imagen} alt={product.titulo} className="card-img-top" />
+              <img src={product.imagen} alt={product.titulo} className="card-img-top" style={{ height: '200px', objectFit: 'cover' }}/>
               <div className="card-body">
                 <h5 className="card-title">{product.titulo}</h5>
                 <p className="card-text">Precio: ${product.precio}</p>

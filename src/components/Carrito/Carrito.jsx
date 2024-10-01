@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useState } from 'react'; 
 import { CartContext } from '../../context/CartContext';
 
 const Carrito = () => {
@@ -11,7 +11,7 @@ const Carrito = () => {
   };
 
   return (
-    <div>
+    <div className="container mt-4">
       <h1>Tu Carrito</h1>
       {cart.length === 0 ? (
         <p>No hay productos en el carrito.</p>
@@ -22,15 +22,15 @@ const Carrito = () => {
       ) : (
         <div>
           {cart.map((item) => (
-            <div key={item.id}>
+            <div key={item.id} className="d-flex justify-content-between align-items-center mb-2">
               <p>{item.titulo}</p>
               <p>Precio: ${item.precio}</p>
-              <button onClick={() => removeFromCart(item.id)}>Eliminar</button>
+              <button className="btn btn-danger" onClick={() => removeFromCart(item.id)}>Eliminar</button>
             </div>
           ))}
           <h3>Total: ${totalPrice()}</h3>
-          <button onClick={handleCheckout}>Finalizar Compra</button>
-          <button onClick={clearCart}>Vaciar Carrito</button>
+          <button className="btn btn-primary" onClick={handleCheckout}>Finalizar Compra</button>
+          <button className="btn btn-secondary" onClick={clearCart}>Vaciar Carrito</button>
         </div>
       )}
     </div>

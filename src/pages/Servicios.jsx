@@ -3,7 +3,7 @@ import ProductList from '../components/ProductList/ProductList';
 
 const Servicios = () => {
   return (
-    <div>
+    <div className="container mt-4">
       <h1>Nuestros Servicios</h1>
       <ProductList />
     </div>
