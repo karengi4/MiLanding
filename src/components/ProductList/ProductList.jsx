@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext  } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { db } from '../../../firebaseConfig';
 import { collection, getDocs } from 'firebase/firestore';
 import { getCategories } from '../../services/getCategories';
@@ -53,7 +53,7 @@ const ProductList = () => {
 
   return (
     <div className="container">
-      <h2>Servicios Ofrecidos</h2>
+      <h2 className="my-4">Servicios Ofrecidos</h2>
       
       <select onChange={handleCategoryChange} value={selectedCategory} className="form-select mb-3">
         <option value="">Selecciona una categoría</option>
@@ -67,12 +67,12 @@ const ProductList = () => {
       <div className="row">
         {filteredProducts.map(product => (
           <div className="col-md-4 mb-4" key={product.id}>
-            <div className="card">
-              <img src={product.imagen} alt={product.titulo} className="card-img-top" style={{ height: '200px', objectFit: 'cover' }}/>
-              <div className="card-body">
+            <div className="card d-flex flex-column align-items-center h-100">
+              <img src={product.imagen} alt={product.titulo} className="card-img-top" style={{ height: '200px', objectFit: 'cover' }} />
+              <div className="card-body text-center">
                 <h5 className="card-title">{product.titulo}</h5>
                 <p className="card-text">Precio: ${product.precio}</p>
-                <p className="card-text">Descripción: {product.descripcion}</p>
+                <p className="card-text">Descripción: {product.descripcion ? product.descripcion : 'Sin descripción disponible'}</p>
                 <button className="btn btn-success" onClick={() => addToCart(product)}>
                   Agregar al Carrito
                 </button>
