@@ -1,4 +1,7 @@
 import React from 'react';
+import vision from '../../assets/images/vision.jpg';
+import valores from '../../assets/images/valores.jpg';
+import mision from '../../assets/images/mision.jpg';
 
 const Tarjetas = () => {
   return (
@@ -7,7 +10,7 @@ const Tarjetas = () => {
         <div className="row">
           {/* Tarjeta de Visión */}
           <div className="columna col-12 col-md-4 d-flex flex-column justify-content-evenly">
-            <img src="../assets/images/vision.jpg" alt="Visión" />
+            <img src={vision} alt="Visión" />
             <h4 className="nosotros-titulo">Visión</h4>
             <p>
               Ser una Consultora de Recursos Humanos que destaque por la calidad y excelencia en la prestación de sus servicios y brinde acompañamiento a organizaciones e individos, optimizando sus propios recursos en la búsqueda del cambio y la mejora.
@@ -21,7 +24,7 @@ const Tarjetas = () => {
 
           {/* Tarjeta de Misión */}
           <div className="columna col-12 col-md-4 d-flex flex-column justify-content-evenly">
-            <img src="../assets/images/mision.jpg" alt="Misión" />
+            <img src={mision} alt="Misión" />
             <h4 className="nosotros-titulo">Misión</h4>
             <p>
               Brindar consultoría y asesoramiento personalizado a nuestros clientes en materia de Gestión del Talento con el objetivo de satisfacer sus necesidades y generar valor, incorporando talento estratégico e implementando soluciones valiosas.
@@ -35,7 +38,7 @@ const Tarjetas = () => {
 
           {/* Tarjeta de Valores */}
           <div className="columna col-12 col-md-4 d-flex flex-column justify-content-evenly">
-            <img src="../assets/images/valores.jpg" alt="Valores" />
+            <img src={valores} alt="Valores" />
             <h4 className="nosotros-titulo">Valores</h4>
             <p>
               Compromiso, ética e integridad en el trabajo, flexibilidad para adaptarnos rápidamente a las necesidades de nuestros clientes e innovación en nuestros procesos de mejora continua para lograr la máxima calidad en nuestros servicios.
