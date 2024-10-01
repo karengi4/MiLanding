@@ -1,13 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext  } from 'react';
 import { db } from '../../../firebaseConfig';
 import { collection, getDocs } from 'firebase/firestore';
 import { getCategories } from '../../services/getCategories';
+import { CartContext } from '../../context/CartContext';
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('');
+  const { addToCart } = useContext(CartContext);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -50,10 +52,10 @@ const ProductList = () => {
   if (loading) return <div>Cargando servicios...</div>;
 
   return (
-    <div>
+    <div className="container">
       <h2>Servicios Ofrecidos</h2>
       
-      <select onChange={handleCategoryChange} value={selectedCategory}>
+      <select onChange={handleCategoryChange} value={selectedCategory} className="form-select mb-3">
         <option value="">Selecciona una categoría</option>
         {categories.map(category => (
           <option key={category.id} value={category.name}>
@@ -62,17 +64,23 @@ const ProductList = () => {
         ))}
       </select>
 
-      <ul>
+      <div className="row">
         {filteredProducts.map(product => (
-          <li key={product.id}>
-            <h3>{product.titulo}</h3>
-            <img src={product.imagen} alt={product.titulo} />
-            <p>Precio: ${product.precio}</p>
-            <p>Categoría: {product.categoria}</p>
-            <p>Descripción: {product.descripcion}</p>
-          </li>
+          <div className="col-md-4 mb-4" key={product.id}>
+            <div className="card">
+              <img src={product.imagen} alt={product.titulo} className="card-img-top" />
+              <div className="card-body">
+                <h5 className="card-title">{product.titulo}</h5>
+                <p className="card-text">Precio: ${product.precio}</p>
+                <p className="card-text">Descripción: {product.descripcion}</p>
+                <button className="btn btn-success" onClick={() => addToCart(product)}>
+                  Agregar al Carrito
+                </button>
+              </div>
+            </div>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
