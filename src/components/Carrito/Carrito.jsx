@@ -25,7 +25,7 @@ const Carrito = () => {
   const handleConfirmData = (e) => {
     e.preventDefault(); 
     if (customerData.nombre && customerData.email) {
-      setIsFinalized(true);  
+      setIsFinalized(true); 
       clearCart();  
     } else {
       alert('Por favor, completa todos los campos antes de confirmar los datos.');
@@ -33,15 +33,15 @@ const Carrito = () => {
   };
 
   return (
-    <div className="container mt-4">
+    <div className="container d-flex justify-content-center align-items-center vh-100">
       <div className="row">
-        <div className="col-md-8 mb-3">
-          <h1>Tu Carrito</h1>
+        <div className="col-md-8 offset-md-2">
+          <h1 className="text-center">Tu Carrito</h1>
 
           {cart.length === 0 ? (
-            <p>No hay productos en el carrito.</p>
+            <p className="text-center">No hay productos en el carrito.</p>
           ) : isFinalized ? (
-            <div>
+            <div className="text-center">
               <h3 className="text-success">Gracias por tu compra</h3>
               <p>A la brevedad te contactaremos para confirmar la modalidad de pago.</p>
             </div>
@@ -56,18 +56,20 @@ const Carrito = () => {
                       <button className="btn btn-danger" onClick={() => removeFromCart(item.id)}>Eliminar</button>
                     </div>
                   ))}
-                  <h3>Total: ${totalPrice()}</h3>
-                  <button className="btn btn-primary me-2" onClick={handleCheckout}>
-                    Finalizar Compra
-                  </button>
-                  <button className="btn btn-secondary" onClick={clearCart}>
-                    Vaciar Carrito
-                  </button>
+                  <h3 className="text-center">Total: ${totalPrice()}</h3>
+                  <div className="d-flex justify-content-center">
+                    <button className="btn btn-primary me-2" onClick={handleCheckout}>
+                      Finalizar Compra
+                    </button>
+                    <button className="btn btn-secondary" onClick={clearCart}>
+                      Vaciar Carrito
+                    </button>
+                  </div>
                 </div>
               )}
 
               {isCheckout && !isFinalized && (
-                <div>
+                <div className="text-center">
                   <h2>Completa tus datos personales</h2>
                   <form onSubmit={handleConfirmData}>
                     <div className="mb-3">
