@@ -28,7 +28,7 @@ const Carrito = () => {
 
   const handleConfirmData = () => {
     if (customerData.nombre && customerData.email) {
-      setIsFinalized(true);  
+      setIsFinalized(true); 
       clearCart(); 
     } else {
       alert('Por favor, completa todos los campos antes de confirmar los datos.');
@@ -68,39 +68,41 @@ const Carrito = () => {
         </div>
 
         <div className="col-md-4">
-          <h2>Completa tus datos personales</h2>
           {isCheckout && !isFinalized ? (
-            <form onSubmit={(e) => e.preventDefault()}>
-              <div className="mb-3">
-                <label htmlFor="nombre" className="form-label">Nombre</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="nombre"
-                  name="nombre"
-                  value={customerData.nombre}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
-              <div className="mb-3">
-                <label htmlFor="email" className="form-label">Email</label>
-                <input
-                  type="email"
-                  className="form-control"
-                  id="email"
-                  name="email"
-                  value={customerData.email}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
-              <button type="submit" className="btn btn-success" onClick={handleConfirmData}>
-                Confirmar datos
-              </button>
-            </form>
+            <div>
+              <h2>Completa tus datos personales</h2>
+              <form onSubmit={(e) => e.preventDefault()}>
+                <div className="mb-3">
+                  <label htmlFor="nombre" className="form-label">Nombre</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="nombre"
+                    name="nombre"
+                    value={customerData.nombre}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="email" className="form-label">Email</label>
+                  <input
+                    type="email"
+                    className="form-control"
+                    id="email"
+                    name="email"
+                    value={customerData.email}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </div>
+                <button type="submit" className="btn btn-success" onClick={handleConfirmData}>
+                  Confirmar datos
+                </button>
+              </form>
+            </div>
           ) : (
-            <p>Para finalizar, completa tus datos personales después de presionar "Finalizar Compra".</p>
+            !isFinalized && <p>Para finalizar, completa tus datos personales después de presionar "Finalizar Compra".</p>
           )}
         </div>
       </div>
