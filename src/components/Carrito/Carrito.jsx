@@ -26,7 +26,8 @@ const Carrito = () => {
     }
   };
 
-  const handleConfirmData = () => {
+  const handleConfirmData = (e) => {
+    e.preventDefault(); 
     if (customerData.nombre && customerData.email) {
       setIsFinalized(true); 
       clearCart(); 
@@ -71,7 +72,7 @@ const Carrito = () => {
           {isCheckout && !isFinalized ? (
             <div>
               <h2>Completa tus datos personales</h2>
-              <form onSubmit={(e) => e.preventDefault()}>
+              <form onSubmit={handleConfirmData}>
                 <div className="mb-3">
                   <label htmlFor="nombre" className="form-label">Nombre</label>
                   <input
@@ -96,7 +97,7 @@ const Carrito = () => {
                     required
                   />
                 </div>
-                <button type="submit" className="btn btn-success" onClick={handleConfirmData}>
+                <button type="submit" className="btn btn-success">
                   Confirmar datos
                 </button>
               </form>
