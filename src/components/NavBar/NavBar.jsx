@@ -25,15 +25,20 @@ const NavBar = () => {
               <Link className="nav-link btn btn-outline-primary mx-2" to="/servicios">Servicios</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link btn btn-outline-primary mx-2" to="/busquedas">Búquedas</Link>
+              <Link className="nav-link btn btn-outline-primary mx-2" to="/busquedas">Búsquedas</Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link btn btn-outline-primary mx-2" to="/contacto">Contacto</Link>
             </li>
           </ul>
         </div>
-        <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+
+        <div className="d-none d-lg-flex" style={{ position: 'relative', alignItems: 'center' }}>
           <CartWidget style={{ width: '50px', height: '50px' }} /> 
+        </div>
+
+        <div className="d-lg-none d-flex justify-content-center mt-3">
+          <CartWidget style={{ width: '50px', height: '50px' }} />
         </div>
       </div>
     </nav>
