@@ -3,7 +3,7 @@ import { CartContext } from '../../context/CartContext';
 import { Modal, Button } from 'react-bootstrap';
 
 const Carrito = () => {
-  const { cart, removeFromCart, clearCart, totalPrice, addToCart } = useContext(CartContext);
+  const { cart, removeFromCart, clearCart, totalPrice } = useContext(CartContext);
   const [showConfirmPurchase, setShowConfirmPurchase] = useState(false);
   const [showConfirmClearCart, setShowConfirmClearCart] = useState(false);
   const [orderNumber, setOrderNumber] = useState(null);
@@ -33,14 +33,6 @@ const Carrito = () => {
     } else {
       alert('Por favor, completa todos los campos antes de confirmar la compra.');
     }
-  };
-
-  const handleAddToCart = (item) => {
-    addToCart(item);
-    setMessage('Se ha agregado a tu carrito de compras'); 
-    setTimeout(() => {
-      setMessage(''); 
-    }, 3000);
   };
 
   const ConfirmPurchaseModal = () => (

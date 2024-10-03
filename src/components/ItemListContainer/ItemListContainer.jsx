@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
 import ItemList from '../ItemList/ItemList';
-import { db } from '../../../firebaseConfig'; 
+import { db } from '../../services/firebase/firebaseConfig'; 
+import { DotLoader } from 'react-spinners';
 
 const ItemListContainer = () => {
   const [items, setItems] = useState([]);
@@ -26,13 +27,9 @@ const ItemListContainer = () => {
   }, []);
 
   return (
-    <div>
-      {loading ? (
-        <p>Cargando servicios...</p>
-      ) : (
-        <ItemList items={items} />
-      )}
-    </div>
+    <>
+      {loading ? <DotLoader /> : <ItemList items={items} />}
+    </>
   );
 };
 

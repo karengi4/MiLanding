@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { db } from '../../firebaseConfig'
+import { db } from '../services/firebase/firebaseConfig'
 import { collection, getDocs } from 'firebase/firestore';
 import BusquedaItem from '../components/BusquedaItem/BusquedaItem';
+import { DotLoader } from 'react-spinners';
 
 const Busquedas = () => {
     const [busquedas, setBusquedas] = useState([]);
@@ -23,7 +24,17 @@ const Busquedas = () => {
     }, []);
 
     if (loading) {
-        return <div className="text-center mt-4">Cargando...</div>;
+        return (
+            <div
+                className="d-flex justify-content-center align-items-center"
+                style={{
+                    height: '100vh', 
+                    backgroundColor: '#f8f9fa', 
+                }}
+            >
+                <DotLoader size={60} color="#007bff" /> 
+            </div>
+        );
     }
 
     return (

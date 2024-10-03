@@ -1,9 +1,10 @@
 import { useEffect, useState, useContext } from 'react';
-import { db } from '../../../firebaseConfig';
+import { db } from '../../services/firebase/firebaseConfig';
 import { collection, getDocs } from 'firebase/firestore';
 import { getCategories } from '../../services/getCategories';
 import { CartContext } from '../../context/CartContext';
 import { Link } from 'react-router-dom';
+import { DotLoader } from 'react-spinners';
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -49,7 +50,20 @@ const ProductList = () => {
     ? products.filter(product => product.categoria === selectedCategory) 
     : products;
 
-  if (loading) return <div>Cargando servicios...</div>;
+  if (loading) {
+    return (
+      <div
+        className="d-flex justify-content-center align-items-center"
+        style={{
+          height: '100vh', 
+          backgroundColor: '#f8f9fa', 
+        }}
+      >
+        <DotLoader size={60} color="#007bff" /> 
+      </div>
+    );
+  }
+
 
   return (
     <div className="container">
