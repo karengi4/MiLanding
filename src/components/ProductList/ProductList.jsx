@@ -66,11 +66,11 @@ const ProductList = () => {
 
 
   return (
-    <div className="container">
-      <h2 className="my-4">Servicios Ofrecidos</h2>
+    <div className="container ">
+      <h3 className="my-4 text-center">Conocé nuestra amplia variedad de servicios para elegir aquel que mejor se adapte a tus necesidades</h3>
       
-      <select onChange={handleCategoryChange} value={selectedCategory} className="form-select mb-3">
-        <option value="">Selecciona una categoría</option>
+      <select onChange={handleCategoryChange} value={selectedCategory} className="form-select mb-3 text-center">
+        <option value="">Seleccioná una categoría</option>
         {categories.map(category => (
           <option key={category.id} value={category.name}>
             {category.name}
@@ -81,7 +81,7 @@ const ProductList = () => {
       <div className="row">
         {filteredProducts.map(product => (
           <div className="col-md-4 mb-4" key={product.id}>
-            <div className="card d-flex flex-column align-items-center h-100">
+            <div className="card d-flex flex-column align-items-center h-100 " style={{backgroundColor: '#ADD8E6'}}>
               <img src={product.imagen} alt={product.titulo} className="card-img-top" style={{ height: '200px', objectFit: 'cover' }} />
               <div className="card-body text-center">
                 <h5 className="card-title">{product.titulo}</h5>

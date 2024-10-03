@@ -7,6 +7,7 @@ import ItemDetailContainer from '../components/ItemDetailContainer/ItemDetailCon
 import Busquedas from '../pages/Busquedas';
 import Carrito from '../components/Carrito/Carrito';
 
+
 const AppRoutes = () => {
   return (
     <Routes>
@@ -17,6 +18,7 @@ const AppRoutes = () => {
       <Route path="/servicios/:id" element={<ItemDetailContainer />} />
       <Route path="/busquedas" element={<Busquedas />} />
       <Route path="/carrito" element={<Carrito />} />
+      <Route path="*" element={<h1>404 NOT FOUND</h1>} />
     </Routes>
   );
 };
