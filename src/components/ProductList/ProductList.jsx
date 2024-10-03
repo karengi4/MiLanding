@@ -3,13 +3,13 @@ import { db } from '../../../firebaseConfig';
 import { collection, getDocs } from 'firebase/firestore';
 import { getCategories } from '../../services/getCategories';
 import { CartContext } from '../../context/CartContext';
+import { Link } from 'react-router-dom';
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('');
-  const { addToCart } = useContext(CartContext);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -73,9 +73,9 @@ const ProductList = () => {
                 <h5 className="card-title">{product.titulo}</h5>
                 <p className="card-text">Precio: ${product.precio}</p>
                 <p className="card-text">Descripción: {product.descripcion ? product.descripcion : 'Sin descripción disponible'}</p>
-                <button className="btn btn-success" onClick={() => addToCart(product)}>
-                  Agregar al Carrito
-                </button>
+                <Link to={`/servicios/${product.id}`} className="btn btn-primary">
+                  Ver Más
+                </Link>
               </div>
             </div>
           </div>

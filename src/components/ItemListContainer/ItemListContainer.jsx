@@ -1,26 +1,37 @@
 import { useState, useEffect } from 'react';
+import { collection, getDocs } from 'firebase/firestore';
 import ItemList from '../ItemList/ItemList';
-import { getFirestore, collection, getDocs } from 'firebase/firestore';
-import { db } from '../../services/firebase/firebaseConfig'
+import { db } from '../../../firebaseConfig'; 
 
 const ItemListContainer = () => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const getItems = async () => {
-      const querySnapshot = await getDocs(collection(getFirestore(db), 'items'));
-      const docs = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-      setItems(docs);
-      setLoading(false);
+    const fetchItems = async () => {
+      try {
+        const serviciosCollection = collection(db, 'servicios'); 
+        const serviciosSnapshot = await getDocs(serviciosCollection);
+        const serviciosList = serviciosSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        
+        setItems(serviciosList);
+      } catch (error) {
+        console.error("Error al obtener servicios: ", error);
+      } finally {
+        setLoading(false);
+      }
     };
 
-    getItems();
+    fetchItems();
   }, []);
 
   return (
     <div>
-      {loading ? <p>Cargando servicios...</p> : <ItemList items={items} />}
+      {loading ? (
+        <p>Cargando servicios...</p>
+      ) : (
+        <ItemList items={items} />
+      )}
     </div>
   );
 };

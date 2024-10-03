@@ -12,9 +12,9 @@ const Checkout = () => {
 
   const handleCheckout = (e) => {
     e.preventDefault();
-    // Aquí iría la lógica para generar la orden de compra.
+
     clearCart();
-    setOrderID('12345ABC'); // Esto es solo un ejemplo.
+    setOrderID('12345ABC'); 
   };
 
   return (

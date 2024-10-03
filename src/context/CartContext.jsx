@@ -5,8 +5,18 @@ export const CartContext = createContext();
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
 
-  const addToCart = (item) => {
-    setCart([...cart, item]);
+  const addToCart = (itemToAdd) => {
+    setCart((prevCart) => {
+      const existingItemIndex = prevCart.findIndex(item => item.id === itemToAdd.id);
+  
+      if (existingItemIndex !== -1) {
+        const updatedCart = [...prevCart];
+        updatedCart[existingItemIndex].quantity += itemToAdd.quantity; 
+        return updatedCart;
+      }
+  
+      return [...prevCart, { ...itemToAdd, quantity: itemToAdd.quantity }];
+    });
   };
 
   const removeFromCart = (id) => {
@@ -18,7 +28,7 @@ export const CartProvider = ({ children }) => {
   };
 
   const totalPrice = () => {
-    return cart.reduce((acc, item) => acc + (item.precio || 0), 0); 
+    return cart.reduce((acc, item) => acc + (item.precio * item.quantity || 0), 0); 
   };
 
   return (

@@ -3,7 +3,7 @@ import { CartContext } from '../../context/CartContext';
 import { Modal, Button } from 'react-bootstrap';
 
 const Carrito = () => {
-  const { cart, removeFromCart, clearCart, totalPrice } = useContext(CartContext);
+  const { cart, removeFromCart, clearCart, totalPrice, addToCart } = useContext(CartContext);
   const [showConfirmPurchase, setShowConfirmPurchase] = useState(false);
   const [showConfirmClearCart, setShowConfirmClearCart] = useState(false);
   const [orderNumber, setOrderNumber] = useState(null);
@@ -13,6 +13,7 @@ const Carrito = () => {
     email: '',
   });
   const [isFinalized, setIsFinalized] = useState(false);
+  const [message, setMessage] = useState(''); 
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -24,14 +25,22 @@ const Carrito = () => {
 
   const handleConfirmPurchase = () => {
     if (customerData.nombre && customerData.telefono && customerData.email) {
-      const generatedOrderNumber = Math.floor(10000 + Math.random() * 90000); 
+      const generatedOrderNumber = Math.floor(10000 + Math.random() * 90000);
       setOrderNumber(generatedOrderNumber);
       setIsFinalized(true);
       setShowConfirmPurchase(false);
-      clearCart(); 
+      clearCart();
     } else {
       alert('Por favor, completa todos los campos antes de confirmar la compra.');
     }
+  };
+
+  const handleAddToCart = (item) => {
+    addToCart(item);
+    setMessage('Se ha agregado a tu carrito de compras'); 
+    setTimeout(() => {
+      setMessage(''); 
+    }, 3000);
   };
 
   const ConfirmPurchaseModal = () => (
@@ -87,14 +96,13 @@ const Carrito = () => {
                 <h3 className="text-center">Resumen del Pedido</h3>
                 {cart.map((item, index) => (
                   <div key={`${item.id}-${index}`} className="d-flex justify-content-between align-items-center mb-2 border p-2 rounded">
-                    <p>{item.titulo} (x{item.cantidad || 1})</p>
-                    <p>Precio: ${item.precio ? item.precio * (item.cantidad || 1) : 0}</p> 
+                    <p>{item.titulo} (x{item.quantity})</p> 
+                    <p>Precio: ${item.precio * item.quantity}</p>
                     <button className="btn btn-danger" onClick={() => removeFromCart(item.id)}>
                       Eliminar
                     </button>
                   </div>
                 ))}
-
 
                 <h4 className="text-center mt-3">Total: ${totalPrice()}</h4>
 
@@ -146,6 +154,8 @@ const Carrito = () => {
                     Confirmar Compra
                   </Button>
                 </div>
+
+                {message && <p className="text-center mt-3 text-success">{message}</p>}
               </div>
             )}
           </div>
